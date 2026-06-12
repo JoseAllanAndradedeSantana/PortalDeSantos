@@ -1,0 +1,73 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <a class="navbar-brand" href="/">
+        Postos Portal de Santos
+    </a>
+    <a class="navbar-brand" href="/abastecimento">
+        Consulta Abastecimentos
+    </a>
+    <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+            <a class="nav-link" href="/chamados">Tarefas</a>
+        </li>
+        <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Equipamentos
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="/equipamentos?empresa=Santour">Santour</a>
+            <a class="dropdown-item" href="/equipamentos?empresa=Gaivota">Gaivota</a>
+            <a class="dropdown-item" href="/equipamentos?empresa=Lunar">Lunar</a>
+            <a class="dropdown-item" href="/equipamentos?empresa=MF">MF</a>
+            <a class="dropdown-item" href="/equipamentos?empresa=Gonzaga">Gonzaga</a>
+            <a class="dropdown-item" href="/equipamentos?empresa=Thiago">Thiago</a>
+            <a class="dropdown-item" href="/equipamentos?empresa=Carla">Carla</a>
+            <a class="dropdown-item" href="/equipamentos?empresa=MFR">MFR</a>
+            <a class="dropdown-item" href="/equipamentos?empresa=R%26L">R&L</a>
+        </div>
+        </li>
+        <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Base de Conhecimento
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="#">Lojas</a>
+          <a class="dropdown-item" href="#">Postos</a>
+          <a class="dropdown-item" href="#">T.I</a>
+          <a class="dropdown-item" href="#">DP</a>
+          <a class="dropdown-item" href="#">FATURAMENTO</a>
+        </div>
+        </li>
+        <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Bombas
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="/portaldesantos/admin/bomba/bombas?empresa=Santour">Santour</a>
+            <a class="dropdown-item" href="/portaldesantos/admin/bomba/bombas?empresa=Gaivota">Gaivota</a>
+            <a class="dropdown-item" href="/portaldesantos/admin/bomba/bombas?empresa=Lunar">Lunar</a>
+            <a class="dropdown-item" href="/portaldesantos/admin/bomba/bombas?empresa=MF">MF</a>
+            <a class="dropdown-item" href="/portaldesantos/admin/bomba/bombas?empresa=Gonzaga">Gonzaga</a>
+            <a class="dropdown-item" href="/portaldesantos/admin/relatorio/bomba">Relatório Lacres</a>
+        </div>
+        </li>
+    </ul>
+    <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+            <a class="nav-link" href="/portaldesantos/admin/tarefa/new">Em Desenvolvimento</a>
+        </li>
+    </ul>
+    
+    <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+            <a class="nav-link" href="/logout">Sair</a>
+        </li>
+    </ul>
+    <form class="form-inline ml-auto">
+        <div class="input-group">
+            <input type="search" class="form-control" placeholder="Buscar Tarefa" aria-label="Buscar">
+        <div class="input-group-append">
+            <button class="btn btn-outline-light" type="submit">Buscar</button>
+        </div>
+        </div>
+    </form>
+</nav>
