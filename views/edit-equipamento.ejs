@@ -1,0 +1,227 @@
+<%- include('./partials/header.ejs') %>
+<%- include('./partials/navbar.ejs') %>
+
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-md-10 col-lg-8">
+
+      <div class="card shadow-lg border-0 rounded-4">
+        
+        <div class="card-header bg-primary text-white rounded-top-4 p-4">
+          <h2 class="mb-0">
+            ✏️ Editar Equipamento
+          </h2>
+          <small>Atualize as informações do equipamento abaixo</small>
+        </div>
+
+        <div class="card-body p-4">
+
+          <form action="/update-equipamento" method="POST">
+
+            <input 
+              type="hidden" 
+              id="idEquipamento" 
+              name="idEquipamento" 
+              value="<%= equipamento.id %>"
+            >
+
+            <input 
+              type="hidden" 
+              id="empresa" 
+              name="empresa" 
+              value="<%= equipamento.empresa %>"
+            >
+
+            <!-- MODELO -->
+            <div class="mb-3">
+              <label for="modelo" class="form-label fw-bold">
+                Modelo
+              </label>
+              <input 
+                type="text" 
+                class="form-control form-control-lg" 
+                id="modelo" 
+                name="modelo"
+                value="<%= equipamento.modelo %>" 
+                required
+              >
+            </div>
+
+            <!-- NUMERO SERIE -->
+            <div class="mb-3">
+              <label for="numero_serie" class="form-label fw-bold">
+                Número de Série
+              </label>
+              <input 
+                type="text" 
+                class="form-control form-control-lg" 
+                id="numero_serie" 
+                name="numero_serie"
+                value="<%= equipamento.numero_serie %>" 
+                required
+              >
+            </div>
+
+            <!-- TERMINAL -->
+            <div class="mb-3">
+              <label for="numero_terminal" class="form-label fw-bold">
+                Número do Terminal
+              </label>
+              <input 
+                type="text" 
+                class="form-control form-control-lg" 
+                id="numero_terminal" 
+                name="numero_terminal"
+                value="<%= equipamento.numero_terminal %>" 
+                required
+              >
+            </div>
+
+            <!-- LACRE -->
+            <div class="mb-3">
+              <label for="numero_lacre" class="form-label fw-bold">
+                Número do Lacre
+              </label>
+              <input 
+                type="text" 
+                class="form-control form-control-lg" 
+                id="numero_lacre" 
+                name="numero_lacre"
+                value="<%= equipamento.numero_lacre %>" 
+                required
+              >
+            </div>
+
+            <!-- OPERADORA -->
+            <div class="mb-3">
+              <label for="operadora" class="form-label fw-bold">
+                Operadora
+              </label>
+              <input 
+                type="text" 
+                class="form-control form-control-lg" 
+                id="operadora" 
+                name="operadora"
+                value="<%= equipamento.operadora %>"
+              >
+            </div>
+
+            <!-- IP -->
+            <div class="mb-3">
+              <label for="ip" class="form-label fw-bold">
+                IP
+              </label>
+              <input 
+                type="text" 
+                class="form-control form-control-lg" 
+                id="ip" 
+                name="ip"
+                value="<%= equipamento.ip %>"
+              >
+            </div>
+
+            <!-- PROTOCOLO -->
+            <div class="mb-3">
+              <label for="protocolo" class="form-label fw-bold">
+                Protocolo
+              </label>
+              <input 
+                type="text" 
+                class="form-control form-control-lg" 
+                id="protocolo" 
+                name="protocolo"
+                value="<%= equipamento.protocolo || '' %>"
+              >
+            </div>
+
+            <!-- MOTIVO DEVOLUÇÃO -->
+            <div class="mb-3">
+              <label for="movito_devolucao" class="form-label fw-bold">
+                Motivo da Devolução
+              </label>
+              <textarea 
+                class="form-control"
+                id="movito_devolucao"
+                name="movito_devolucao"
+                rows="3"
+              ><%= equipamento.movito_devolucao || '' %></textarea>
+            </div>
+
+            <!-- DATA DEVOLUÇÃO -->
+            <div class="mb-3">
+              <label for="data_devolucao" class="form-label fw-bold">
+                Data de Devolução
+              </label>
+              <input 
+                type="date" 
+                class="form-control form-control-lg"
+                id="data_devolucao"
+                name="data_devolucao"
+                value="<%= equipamento.data_devolucao ? equipamento.data_devolucao.toISOString().split('T')[0] : '' %>"
+              >
+            </div>
+
+            <!-- ALUGUEL -->
+            <div class="mb-3">
+              <label for="taxa_aluguel_pos" class="form-label fw-bold">
+                Valor do Aluguel POS
+              </label>
+
+              <div class="input-group">
+                <span class="input-group-text">R$</span>
+
+                <input 
+                  type="text"
+                  class="form-control form-control-lg"
+                  id="taxa_aluguel_pos"
+                  name="taxa_aluguel_pos"
+                  placeholder="0,00"
+                  value="<%= equipamento.taxa_aluguel_pos || '' %>"
+                >
+              </div>
+            </div>
+
+            <!-- STATUS -->
+            <div class="mb-4">
+              <label for="status" class="form-label fw-bold">
+                Status
+              </label>
+
+              <select 
+                class="form-select form-select-lg"
+                id="status"
+                name="status"
+              >
+                <option value="ATIVO" <%= equipamento.status === 'ATIVO' ? 'selected' : '' %>>
+                  🟢 Ativo
+                </option>
+
+                <option value="INATIVO" <%= equipamento.status === 'INATIVO' ? 'selected' : '' %>>
+                  🔴 Inativo
+                </option>
+              </select>
+            </div>
+
+            <!-- BOTÕES -->
+            <div class="d-flex justify-content-between gap-3">
+
+              <a href="/equipamentos?empresa=<%= equipamento.empresa%>" class="btn btn-outline-secondary btn-lg w-50">
+                ← Voltar
+              </a>
+
+              <button type="submit" class="btn btn-primary btn-lg w-50">
+                💾 Salvar Alterações
+              </button>
+
+            </div>
+
+          </form>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<%- include('./partials/footer.ejs') %>
