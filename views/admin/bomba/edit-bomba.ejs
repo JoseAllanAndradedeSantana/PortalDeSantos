@@ -1,0 +1,317 @@
+<%- include ('./../../partials/header.ejs') %>
+<%- include ('./../../partials/navbar.ejs') %>
+
+<style>
+
+  body{
+    background: #f4f6f9;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+  .container-page{
+    padding: 20px;
+  }
+
+  .topo-page{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+    gap: 15px;
+  }
+
+  .logo{
+    max-width: 180px;
+  }
+
+  .btn-voltar{
+    padding: 10px 18px;
+    border-radius: 8px;
+    font-weight: bold;
+    box-shadow: 0 2px 8px rgba(0,0,0,.08);
+  }
+
+  .card-detalhes{
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,.06);
+  }
+
+  .titulo-page{
+    font-size: 24px;
+    font-weight: bold;
+    color: #2c3e50;
+    margin-bottom: 25px;
+  }
+
+  .linha-info{
+    margin-bottom: 20px;
+  }
+
+  .titulo-info{
+    font-size: 13px;
+    font-weight: bold;
+    color: #7f8c8d;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+  }
+
+  .valor-info{
+    font-size: 16px;
+    color: #2c3e50;
+    font-weight: 500;
+  }
+
+  .badge-status{
+    padding: 8px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+  }
+
+  .status-ativo{
+    background: #d1f7dc;
+    color: #0f5132;
+  }
+
+  .status-inativo{
+    background: #f8d7da;
+    color: #842029;
+  }
+
+  .card-observacao{
+    background: #f8f9fa;
+    border-radius: 10px;
+    padding: 20px;
+    margin-top: 20px;
+    border-left: 4px solid #0d6efd;
+  }
+
+</style>
+<form action="/portaldesantos/admin/bomba/atualizar/<%= bomba.id %>" method="POST">
+<div class="container-page">
+
+  <div class="topo-page">
+
+    <img src="/images/logo2.png" class="logo">
+
+    <a 
+      href="/portaldesantos/admin/bomba/bombas/<%= bomba.empresa %>"
+      class="btn btn-secondary btn-voltar"
+    >
+      Voltar
+    </a>
+    <!--<a 
+      href="/admin/bomba/atualizar/<%= bomba.id %>"
+      class="btn btn-primary btn-voltar"
+    >
+      Atualizar
+    </a>-->
+    <button
+      type="submit"
+      class="btn btn-primary btn-voltar"
+    >
+      Atualizar
+    </button>
+
+  </div>
+
+  <div class="card-detalhes">
+
+    <div class="titulo-page">
+      Visualização da Bomba
+    </div>
+
+    <div class="row">
+
+      <div class="col-md-2 linha-info">
+
+        <div class="titulo-info">
+          ID
+        </div>
+
+        <div class="valor-info" name="id" id="id">
+          #<%= bomba.id %>
+        </div>
+
+      </div>
+
+      <div class="col-md-2 linha-info">
+
+        <div class="titulo-info">
+          Número
+        </div>
+
+        <div class="valor-info" name="numero" id="numero">
+           <%= bomba.numero %>
+        </div>
+
+      </div>
+
+      <div class="col-md-4 linha-info">
+
+        <div class="titulo-info">
+          Empresa
+        </div>
+
+        
+          
+          <input
+          id="empresa"
+          name="empresa"
+          type="text"
+          class="form-control"
+          value="<%= bomba.empresa %>"
+          readonly>
+        
+
+
+      </div>
+
+      <div class="col-md-4 linha-info">
+
+        <div class="titulo-info">
+          Status
+        </div>
+
+        <div class="valor-info">
+          <select 
+            id="is_ativo"
+            name="is_ativo"
+            class="form-select"
+          >
+            <% if(bomba.is_ativo == 1){ %>
+            <option value="1">
+              <% if(bomba.is_ativo == 1){ %> Ativa <% } %>
+            </option>
+            <option value="0">
+                Inativa
+            </option>
+          <% } %>
+          <% if(bomba.is_ativo == 0){ %>
+            <option value="0">
+             <% if(bomba.is_ativo == 0){ %> Inativa <% } %>
+            </option>
+            <option value="1">
+              Ativa
+            </option>
+          <% } %>
+          </select>
+
+          
+        </div>
+
+      </div>
+
+      <div class="col-md-6 linha-info">
+        <div class="titulo-info">
+          Nome
+        </div>
+        <div class="valor-info">
+            <%= bomba.nome %>      
+        </div>
+      </div>
+
+      <div class="col-md-6 linha-info">
+        <div class="titulo-info">
+          Fabricante
+        </div>
+        <div class="valor-info">
+            <input 
+            type="text"
+            id="fabricante"
+            name="fabricante"
+            class="form-control"
+            value="<%= bomba.fabricante %> "
+            required
+          >       
+        </div>
+      </div>
+
+      <div class="col-md-6 linha-info">
+        <div class="titulo-info">
+          Número de Série
+        </div>
+        <div class="valor-info">
+            <input 
+            type="text"
+            id="numero_serie"
+            name="numero_serie"
+            class="form-control"
+            value="<%= bomba.numero_serie %> "
+            required
+          >      
+        </div>
+      </div>
+      <div class="col-md-6 linha-info">
+
+        <div class="titulo-info">
+          Modelo
+        </div>
+
+        <div class="valor-info">
+            <input 
+            type="text"
+            id="modelo"
+            name="modelo"
+            class="form-control"
+            value="<%= bomba.modelo %> "
+            required
+          > 
+        </div>
+
+      </div>
+
+      <div class="col-md-6 linha-info">
+
+        <div class="titulo-info">
+          Data Inclusão
+        </div>
+
+        <div class="valor-info">
+          
+        </div>
+
+      </div>
+
+      <div class="col-md-6 linha-info">
+
+        <div class="titulo-info">
+          Usuário
+        </div>
+
+        <div class="valor-info">
+          <%= bomba.id_usuario %>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="card-observacao">
+
+      <div class="titulo-info">
+        Observação
+      </div>
+
+      <div class="valor-info">
+        <textarea 
+            type="text"
+            id="observacao"
+            name="observacao"
+            class="form-control"
+            value="<%= bomba.observacao %> "
+            required
+          ><%= bomba.observacao %> </textarea>
+      </div>
+
+    </div>
+</form>
+    <br>
+    <br>
+    <br>
+
+
+<%- include('./../../partials/footer.ejs') %>

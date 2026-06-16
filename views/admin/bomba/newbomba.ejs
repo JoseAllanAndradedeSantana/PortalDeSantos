@@ -1,0 +1,286 @@
+<%- include ('./../../partials/header.ejs') %>
+<%- include('./../../partials/navbar.ejs') %>
+
+<style>
+
+  body{
+    background: #f4f6f9;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+  .container-page{
+    padding: 20px;
+  }
+
+  .topo-page{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+    gap: 15px;
+  }
+
+  .logo{
+    max-width: 180px;
+  }
+
+  .btn-nova{
+    padding: 10px 18px;
+    border-radius: 8px;
+    font-weight: bold;
+    box-shadow: 0 2px 8px rgba(0,0,0,.08);
+  }
+
+  .card-form{
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,.06);
+  }
+
+  .titulo-form{
+    font-size: 22px;
+    font-weight: bold;
+    color: #2c3e50;
+    margin-bottom: 25px;
+  }
+
+  .form-label{
+    font-weight: 600;
+    color: #34495e;
+  }
+
+  .form-control,
+  .form-select,
+  textarea{
+    border-radius: 8px;
+    padding: 10px;
+    border: 1px solid #dcdfe6;
+  }
+
+  .form-control:focus,
+  .form-select:focus,
+  textarea:focus{
+    border-color: #0d6efd;
+    box-shadow: 0 0 0 0.15rem rgba(13,110,253,.25);
+  }
+
+  .btn-salvar{
+    padding: 10px 25px;
+    border-radius: 8px;
+    font-weight: bold;
+  }
+
+</style>
+
+<div class="container-page">
+
+  <div class="topo-page">
+
+    <img src="/images/logo2.png" class="logo">
+
+    <p>
+      Bem vindo <%=  %>
+    </p>
+
+    <a 
+      href="/chamados"
+      class="btn btn-secondary btn-nova"
+    >
+      Voltar
+    </a>
+
+  </div>
+
+  <div class="card-form">
+
+    <div class="titulo-form">
+      Cadastro de Bomba
+    </div>
+
+    <form 
+      action="/portaldesantos/admin/bombas/salvar" 
+      method="POST"
+    >
+
+      <div class="row g-3">
+
+        <div class="col-md-2">
+
+          <label class="form-label">
+            Número
+          </label>
+
+          <input 
+            type="number"
+            id="numero"
+            name="numero"
+            class="form-control"
+            required
+          >
+
+        </div>
+
+        <div class="col-md-5">
+
+          <label class="form-label">
+            Nome
+          </label>
+
+          <input 
+            type="text"
+            id="nome"
+            name="nome"
+            class="form-control"
+            required
+          >
+
+        </div>
+
+        <div class="col-md-5">
+
+          <label class="form-label">
+            Fabricante
+          </label>
+
+          <input 
+            type="text"
+            id="fabricante"
+            name="fabricante"
+            class="form-control"
+            required
+          >
+
+        </div>
+
+        <div class="col-md-4">
+
+          <label class="form-label">
+            Empresa
+          </label>
+
+          <select 
+            id="empresa"
+            name="empresa"
+            class="form-select"
+            required
+          >
+            <option value="">
+              Selecione
+            </option>
+
+            <option value="SANTOUR">
+              SANTOUR
+            </option>
+
+            <option value="GAIVOTA">
+              GAIVOTA
+            </option>
+
+            <option value="LUNAR">
+              LUNAR
+            </option>
+
+            <option value="MF">
+              MF
+            </option>
+
+            <option value="GONZAGA">
+              GONZAGA
+            </option>
+
+          </select>
+
+        </div>
+
+        <div class="col-md-4">
+
+          <label class="form-label">
+            Número de Série
+          </label>
+
+          <input 
+            type="text"
+            id="numero_serie"
+            name="numero_serie"
+            class="form-control"
+            required
+          >
+
+        </div>
+
+        <div class="col-md-4">
+
+          <label class="form-label">
+            Modelo
+          </label>
+
+          <input 
+            type="text"
+            id="modelo"
+            name="modelo"
+            class="form-control"
+            required
+          >
+
+        </div>
+
+        <div class="col-md-8">
+
+          <label class="form-label">
+            Observação
+          </label>
+
+          <textarea 
+            id="observacao"
+            name="observacao"
+            rows="3"
+            class="form-control"
+          ></textarea>
+
+        </div>
+
+        <div class="col-md-4">
+
+          <label class="form-label">
+            Status
+          </label>
+
+          <select 
+            id="is_ativo"
+            name="is_ativo"
+            class="form-select"
+          >
+
+            <option value="1">
+              Ativa
+            </option>
+
+            <option value="0">
+              Inativa
+            </option>
+
+          </select>
+
+        </div>
+
+      </div>
+
+      <div class="mt-4">
+
+        <button 
+          type="submit"
+          class="btn btn-success btn-salvar"
+        >
+          Salvar Bomba
+        </button>
+
+      </div>
+
+    </form>
+
+  </div>
+
+</div>
+<%- include('./../../partials/footer.ejs') %>

@@ -1,0 +1,503 @@
+<%- include ('./../../partials/header.ejs') %>
+<%- include ('./../../partials/navbar.ejs') %>
+
+<style>
+
+  body{
+    background: #f4f6f9;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+  .container-page{
+    padding: 20px;
+  }
+
+  .topo-page{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+    gap: 15px;
+  }
+
+  .logo{
+    max-width: 180px;
+  }
+
+  .btn-voltar{
+    padding: 10px 18px;
+    border-radius: 8px;
+    font-weight: bold;
+    box-shadow: 0 2px 8px rgba(0,0,0,.08);
+  }
+
+  .card-detalhes{
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,.06);
+  }
+
+  .titulo-page{
+    font-size: 24px;
+    font-weight: bold;
+    color: #2c3e50;
+    margin-bottom: 25px;
+  }
+
+  .linha-info{
+    margin-bottom: 20px;
+  }
+
+  .titulo-info{
+    font-size: 13px;
+    font-weight: bold;
+    color: #7f8c8d;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+  }
+
+  .valor-info{
+    font-size: 16px;
+    color: #2c3e50;
+    font-weight: 500;
+  }
+
+  .badge-status{
+    padding: 8px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+  }
+
+  .status-ativo{
+    background: #d1f7dc;
+    color: #0f5132;
+  }
+
+  .status-inativo{
+    background: #f8d7da;
+    color: #842029;
+  }
+
+  .card-observacao{
+    background: #f8f9fa;
+    border-radius: 10px;
+    padding: 20px;
+    margin-top: 20px;
+    border-left: 4px solid #0d6efd;
+  }
+
+</style>
+
+<div class="container-page">
+
+  <div class="topo-page">
+
+    <img src="/images/logo2.png" class="logo">
+
+    <a 
+      href="/portaldesantos/admin/bomba/bombas/<%= bomba.empresa %>"
+      class="btn btn-secondary btn-voltar"
+    >
+      Voltar
+    </a>
+
+  </div>
+
+  <div class="card-detalhes">
+
+    <div class="titulo-page">
+      Visualização da Bomba
+    </div>
+
+    <div class="row">
+
+      <div class="col-md-2 linha-info">
+
+        <div class="titulo-info">
+          ID
+        </div>
+
+        <div class="valor-info">
+          #<%= bomba.id %>
+        </div>
+
+      </div>
+
+      <div class="col-md-2 linha-info">
+
+        <div class="titulo-info">
+          Número
+        </div>
+
+        <div class="valor-info">
+          <%= bomba.numero %>
+        </div>
+
+      </div>
+
+      <div class="col-md-4 linha-info">
+
+        <div class="titulo-info">
+          Empresa
+        </div>
+
+        <div class="valor-info">
+          <%= bomba.empresa %>
+        </div>
+
+      </div>
+
+      <div class="col-md-4 linha-info">
+
+        <div class="titulo-info">
+          Status
+        </div>
+
+        <div class="valor-info">
+
+          <% if(bomba.is_ativo == 1){ %>
+
+            <span class="badge-status status-ativo">
+              ATIVA
+            </span>
+
+          <% } else { %>
+
+            <span class="badge-status status-inativo">
+              INATIVA
+            </span>
+
+          <% } %>
+
+        </div>
+
+      </div>
+
+      <div class="col-md-6 linha-info">
+
+        <div class="titulo-info">
+          Nome
+        </div>
+
+        <div class="valor-info">
+          <%= bomba.nome %>
+        </div>
+
+      </div>
+
+      <div class="col-md-6 linha-info">
+
+        <div class="titulo-info">
+          Fabricante
+        </div>
+
+        <div class="valor-info">
+          <%= bomba.fabricante %>
+        </div>
+
+      </div>
+
+      <div class="col-md-6 linha-info">
+
+        <div class="titulo-info">
+          Número de Série
+        </div>
+
+        <div class="valor-info">
+          <%= bomba.numero_serie %>
+        </div>
+
+      </div>
+
+      <div class="col-md-6 linha-info">
+
+        <div class="titulo-info">
+          Modelo
+        </div>
+
+        <div class="valor-info">
+          <%= bomba.modelo %>
+        </div>
+
+      </div>
+
+      <div class="col-md-6 linha-info">
+
+        <div class="titulo-info">
+          Data Inclusão
+        </div>
+
+        <div class="valor-info">
+          
+        </div>
+
+      </div>
+
+      <div class="col-md-6 linha-info">
+
+        <div class="titulo-info">
+          Usuário
+        </div>
+
+        <div class="valor-info">
+          <%= bomba.id_usuario %>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="card-observacao">
+
+      <div class="titulo-info">
+        Observação
+      </div>
+
+      <div class="valor-info">
+        <%= bomba.observacao %>
+      </div>
+
+    </div>
+
+    <br>
+    <br>
+    <br>
+    <div class="d-flex justify-content-between align-items-center mt-5 mb-3">
+
+    
+    <div class="card-lacre mt-6">
+          <button 
+        class="btn btn-primary"
+        type="button"
+        onclick="abrirFormularioLacre()"
+    >
+        + Adicionar Lacre
+    </button>
+        <h4 class="mb-0">
+        Lacres
+    </h4>
+    <table class="table table-hover align-middle">
+        <thead>
+            <tr>
+              <!-- <th>ID</th>
+                <th>Número Lacre</th> -->
+                <th>Nº Série</th>
+                <th>Status</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% if(lacres.length > 0){ %>
+                <% lacres.forEach(lacre => { %>
+                    <tr>
+                      <!-- <td>
+                            #<%= lacre.id %>
+                        </td> -->
+                       <!-- <td>
+                            <%= lacre.numero_lacre %>
+                        </td> -->
+                        <td>
+                            <%= lacre.numero_serie %>
+                        </td>
+                        <td>
+                            <% if(lacre.is_ativo == 1){ %>
+
+                                <span class="badge-status status-ativo">
+                                    ATIVO
+                                </span>
+
+                            <% } else { %>
+
+                                <span class="badge-status status-inativo">
+                                    INATIVO
+                                </span>
+
+                            <% } %>
+
+                        </td>
+                        
+            <td>
+
+              <form 
+                    method="POST" 
+                    action="/portaldesantos/admin/lacre/excluir"
+                    onsubmit="confirmarDelecao(event,this)" 
+                    style="display: inline;">
+                    <input type="hidden" id="idLacre" name="idLacre" value="<%= lacre.id %>">
+                    <input type="hidden" id="idBomba" name="idBomba" value="<%= bomba.id %>">
+                    <button class="btn btn-danger">Excluir</button>
+              </form>
+
+            </td>
+
+                    </tr>
+
+                <% }) %>
+
+            <% } else { %>
+
+                <tr>
+
+                    <td colspan="6" class="text-center">
+
+                        Nenhum lacre cadastrado.
+
+                    </td>
+
+                </tr>
+
+            <% } %>
+
+        </tbody>
+
+    </table>
+
+</div>
+
+  
+
+</div>
+
+
+<!-- FORMULÁRIO OCULTO -->
+
+<div 
+    class="card-form mb-4"
+    id="formLacre"
+    style="display:none;"
+>
+
+    <div class="titulo-form">
+        Novo Lacre
+    </div>
+
+    <form 
+        action="/portaldesantos/admin/lacre/salvar"
+        method="POST"
+    >
+
+        <input 
+            type="hidden"
+            name="numero"
+            value="<%= bomba.numero %>"
+        >
+
+        <input 
+            type="hidden"
+            id="empresa_lacre"
+            name="empresa_lacre"
+            value="<%= bomba.empresa %>"
+        >
+
+        <input 
+            type="hidden"
+            id="id_bomba_lacre_empresa"
+            name="id_bomba_lacre_empresa"
+            value="<%= bomba.id %>"
+        >
+
+        <div class="row g-3">
+
+           <!-- <div class="col-md-4">
+
+                <label class="form-label">
+                    Número
+                </label>
+
+                <input 
+                    type="number"
+                    id="numero_lacre"
+                    name="numero_lacre"
+                    class="form-control"
+                    required
+                >
+
+            </div> -->
+
+            <div class="col-md-4">
+
+                <label class="form-label">
+                    Nº Série
+                </label>
+
+                <input 
+                    type="text"
+                    id="numero_serie_lacre"
+                    name="numero_serie_lacre"
+                    class="form-control"
+                    required
+                >
+
+            </div>
+
+            <div class="col-md-4">
+
+                <label class="form-label">
+                    Status
+                </label>
+
+                <select 
+                    id="is_ativo_lacre"
+                    name="is_ativo_lacre"
+                    class="form-select"
+                >
+
+                    <option value="1">
+                        Ativo
+                    </option>
+
+                    <option value="0">
+                        Inativo
+                    </option>
+
+                </select>
+
+            </div>
+
+        </div>
+
+        <div class="mt-4">
+
+            <button 
+                type="submit"
+                class="btn btn-success"
+            >
+                Salvar Lacre
+            </button>
+
+            <button 
+                type="button"
+                class="btn btn-secondary"
+                onclick="fecharFormularioLacre()"
+            >
+                Cancelar
+            </button>
+
+        </div>
+
+    </form>
+
+</div>
+<script>
+ 
+    function confirmarDelecao(event, form) {
+        const confirmado = confirm("Deseja realmente excluir este Lacre?");
+        if (!confirmado) {
+        event.preventDefault();
+        }
+    }
+    function abrirFormularioLacre(){
+        document.getElementById('formLacre').style.display = 'block';
+        document.getElementById('btnNovoLacre').style.display = 'none';
+    }
+
+    function fecharFormularioLacre(){
+        document.getElementById('formLacre').style.display = 'none';
+         document.getElementById('btnNovoLacre').style.display = 'block';
+    }
+</script>
+
+<%- include('./../../partials/footer.ejs') %>
