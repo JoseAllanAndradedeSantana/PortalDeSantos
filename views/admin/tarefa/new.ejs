@@ -1,0 +1,280 @@
+<%- include ('./../../partials/header.ejs') %>
+<%- include ('./../../partials/navbar.ejs') %>
+
+<style>
+  body{
+    background: #f4f6f9;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+  .container-form{
+    max-width: 950px;
+    margin: 40px auto;
+  }
+
+  .card-form{
+    background: #fff;
+    padding: 35px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+  }
+
+  .titulo-pagina{
+    font-weight: bold;
+    color: #2c3e50;
+    margin-bottom: 25px;
+  }
+
+  .form-label{
+    color: #34495e;
+    margin-bottom: 6px;
+  }
+
+  .form-control,
+  .form-select{
+    border-radius: 8px;
+    padding: 10px;
+    border: 1px solid #dcdfe6;
+  }
+
+  .form-control:focus,
+  .form-select:focus{
+    border-color: #0d6efd;
+    box-shadow: 0 0 0 0.15rem rgba(13,110,253,.25);
+  }
+
+  .btn-success{
+    padding: 12px;
+    border-radius: 8px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    transition: 0.2s;
+  }
+
+  .btn-success:hover{
+    transform: translateY(-1px);
+  }
+
+  .link-voltar{
+    text-decoration: none;
+    font-weight: bold;
+    color: #0d6efd;
+  }
+
+  .link-voltar:hover{
+    text-decoration: underline;
+  }
+
+  .tox-tinymce{
+    border-radius: 10px !important;
+  }
+</style>
+
+<div class="container-form">
+
+  <div class="card-form">
+
+    <a href="/chamados" class="link-voltar">
+      ← Voltar
+    </a>
+
+    <h2 class="titulo-pagina">
+      Abertura de Tarefa
+    </h2>
+
+    <form method="POST" action="/salvarchamado" enctype="multipart/form-data" onsubmit="return validar()">
+
+      <div class="mb-3">
+        <label class="form-label"><b>Título</b></label>
+        <input 
+          id="titulo" 
+          name="titulo" 
+          type="text" 
+          placeholder="Título do Chamado" 
+          class="form-control"
+        >
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label"><b>Descrição</b></label>
+        <textarea 
+          id="descricao" 
+          name="descricao" 
+          placeholder="Descreva o problema..." 
+          class="form-control"
+        ></textarea>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label"><b>Responsável</b></label>
+        <input 
+          id="responsavel" 
+          name="responsavel" 
+          placeholder="Digite seu nome" 
+          class="form-control"
+        >
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label"><b>Data</b></label>
+        <input 
+          type="date" 
+          id="data" 
+          name="dataAbertura"  
+          class="form-control"
+        >
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label"><b>Status</b></label>
+        <select 
+          id="status" 
+          name="status"  
+          class="form-select"
+        >
+          <option selected></option>
+          <option value="ABERTO">ABERTO</option>
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label"><b>Prioridade</b></label>
+        <select 
+          id="prioridade" 
+          name="prioridade" 
+          class="form-select"
+        >
+          <option selected>Selecione a prioridade</option>
+          <option value="BAIXA">BAIXA</option>
+          <option value="MEDIA">MÉDIA</option>
+          <option value="ALTA">ALTA</option>
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label"><b>Empresa</b></label>
+        <select 
+          id="empresa" 
+          name="empresa" 
+          class="form-select"
+        >
+          <option selected>Selecione a empresa</option>
+          <option value="LOJAS">Lojas</option>
+          <option value="POSTOS">Postos</option>
+          <option value="SANTOUR">Santour</option>
+          <option value="GAIVOTA">Gaivota</option>
+          <option value="LUNAR">Lunar</option>
+          <option value="MF">MF</option>
+          <option value="GONZAGA">Gonzaga</option>
+          <option value="THIAGO">Thiago</option>
+          <option value="CARLA">Carla</option>
+          <option value="MFR">MFR</option>
+          <option value="R&L">R&L</option>
+          <option value="LOJAGONZAGA">Loja Gonzaga</option>
+          <option value="PORTALSERVICOS">Portal Serviços</option>
+        </select>
+      </div>
+
+      <div class="mb-4">
+        <label class="form-label"><b>Setor</b></label>
+        <select 
+          id="setor"
+          name="setor" 
+          class="form-select"
+        >
+          <option selected>Selecione o setor</option>
+          <option value="GERENCIA">GERENCIA</option>
+          <option value="DP">DP</option>
+          <option value="RH">RH</option>
+          <option value="FINANCEIROPOSTOS">Financeiro Postos</option>
+          <option value="FINANCEIROLOJAS">Financeiro Lojas</option>
+          <option value="FATURAMENTO">Faturamento</option>
+          <option value="TI">TI</option>
+        </select>
+      </div>
+      <div class="mb-3">
+  <label class="form-label"><b>Anexo</b></label>
+  <input 
+    type="file" 
+    id="arquivo" 
+    name="arquivo" 
+    class="form-control"
+  >
+</div>
+
+
+      <button type="submit" class="btn btn-success form-control">
+        CRIAR TAREFA
+      </button>
+
+    </form>
+
+  </div>
+
+</div>
+
+<script src="/tinymce/tinymce.min.js"></script>
+
+<script>
+  tinymce.init({
+    selector: "#descricao",
+    language: "pt_BR",
+    height: 350,
+    menubar: true,
+    branding: false,
+
+    plugins: [
+      "advlist autolink link image lists print preview",
+      "searchreplace wordcount fullscreen",
+      "insertdatetime media table code help"
+    ],
+
+    toolbar:
+      "undo redo | styles | bold italic underline | " +
+      "alignleft aligncenter alignright alignjustify | " +
+      "bullist numlist | link image | fullscreen",
+
+    content_style:
+      "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }"
+  });
+</script>
+
+<script>
+  function validar(){
+
+      let empresa = document.getElementById('empresa').value;
+      let titulo = document.getElementById('titulo').value;
+      let responsavel = document.getElementById('responsavel').value;
+      let prioridade = document.getElementById('prioridade').value;
+      let setor = document.getElementById('setor').value;
+
+      if(titulo == ''){
+          alert("O campo título não pode estar vazio!");
+          return false;
+      }
+
+      if(responsavel == ''){
+          alert("O campo responsável não pode estar vazio!");
+          return false;
+      }
+
+      if(empresa == 'Selecione a empresa'){
+          alert("Selecione uma empresa!");
+          return false;
+      }
+
+      if(setor == 'Selecione o setor'){
+          alert("Selecione um setor!");
+          return false;
+      }
+
+      if(prioridade == 'Selecione a prioridade'){
+          alert("Selecione uma prioridade!");
+          return false;
+      }
+
+      return true;
+  }
+</script>
+
+<%- include ('./../../partials/footer.ejs') %>
