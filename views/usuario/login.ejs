@@ -1,0 +1,72 @@
+<%- include ('../partials/header.ejs') %>
+<!--<%- include ('../partials/navbar.ejs') %>-->
+<style>
+  body {
+    background-image: url("/images/fundo.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    min-height: 100vh;
+  }
+</style>
+
+<div class="container d-flex justify-content-center align-items-center min-vh-100">
+  <div class="card p-4 shadow" style="width: 100%; max-width: 400px;">
+    <!-- Logo centralizado -->
+    <div class="text-center mb-4">
+      <img src="/images/logo.png" alt="Logo" class="img-fluid" style="max-height: 80px;">
+    </div>
+    
+    <div class="card-header text-center">
+      <h2 class="mb-0">Login</h2>
+    </div>
+    
+    <div class="card-body">
+      <form action="/logar" method="POST">
+        <div class="mb-3">
+          <label><b>Usuário</b></label>
+          <input class="form-control" name="nome" type="text" placeholder="Nome Usuário" required>
+        </div>
+        
+        <div class="mb-3">
+          <label><b>Senha</b></label>
+          <input class="form-control" name="senha" type="password" placeholder="*********" required>
+        </div>
+        
+        <button type="submit" class="btn btn-warning w-100" name="criar">OK</button>
+      </form>
+      
+    </div>
+  </div>
+</div>
+<!-- Modal de Erro -->
+<div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content border-danger">
+      <div class="modal-header bg-danger text-white">
+        <h5 class="modal-title" id="errorModalLabel">Erro</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+
+      <div class="modal-body">
+        <%= errorMessage || 'Ocorreu um erro inesperado.' %>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Fechar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<% if (errorMessage) { %>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const modal = new bootstrap.Modal(document.getElementById('errorModal'));
+    modal.show();
+  });
+</script>
+<% } %>
+<%- include ('../partials/footer.ejs') %>
