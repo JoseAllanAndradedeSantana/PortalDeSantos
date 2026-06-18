@@ -20,4 +20,4 @@ const buscarUsuarios = () => {
 
 module.exports = {
     buscarUsuarios
-}
+};
