@@ -13,6 +13,7 @@ const criarChamado = async (req, res) => {
 const buscarChamados = async (req, res) => {
     try{
         const usuarioId = req.session.usuario.id;
+        const nomeUsuario = req.session.usuario.nomeUsuario;
         console.log(req.session.usuario)
         const chamados = await chamadoService.buscarChamados(usuarioId);
         const quantidadesDeChamados = await chamadoService.quantidadeDeChamadosAbertos(usuarioId);
@@ -21,7 +22,7 @@ const buscarChamados = async (req, res) => {
             chamados:chamados,
             quantidadesDeChamadosEmAbertos:quantidadesDeChamados,
             quantidadesDeChamadosFechados:quantidadesDeChamadosFechados,
-            usuario:req.session.usuario.nomeUsuario
+            usuario:nomeUsuario
         });
     } catch(error){
         console.log(error);
@@ -67,15 +68,7 @@ const filtrarChamados = async (req, res) => {
 };
 
 const salvarChamado = async (req, res) => {
-    try {
-        let id = req.session.usuario.id;
-
-        const chamados = await chamadoService.buscarChamados(id);
-
-        const quantidadeAbertos = await chamadoService.quantidadeDeChamadosAbertos(id);
-        
-        const quantidadeFechados = await chamadoService.quantidadeDeChamadosFechados(id);
-        
+    try {    
         await chamadoService.criarChamado({
             titulo: req.body.titulo,
             descricao: req.body.descricao,
@@ -87,17 +80,8 @@ const salvarChamado = async (req, res) => {
             prioridade: req.body.prioridade,
             idUsuario: req.session.usuario.id
         });
-
-        res.render('chamados',{
-            chamados,
-            quantidadesDeChamadosEmAbertos:quantidadeAbertos,
-            quantidadesDeChamadosFechados:quantidadeFechados,
-            usuario:req.session.usuario.nomeUsuario
-
-        });
-
+        res.redirect('chamados');
     } catch (error) {
-
         console.error(error);
         res.status(500).send('Erro ao salvar chamado');
     }
