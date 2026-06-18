@@ -74,7 +74,7 @@
 
   <div class="card-form">
 
-    <a href="/chamados" class="link-voltar">
+    <a href="/portaldesantos/chamados" class="link-voltar">
       ← Voltar
     </a>
 
@@ -82,7 +82,7 @@
       Abertura de Tarefa
     </h2>
 
-    <form method="POST" action="/salvarchamado" enctype="multipart/form-data" onsubmit="return validar()">
+    <form method="POST" action="/portaldesantos/salvarchamado" onsubmit="return validar()">
 
       <div class="mb-3">
         <label class="form-label"><b>Título</b></label>
@@ -192,15 +192,7 @@
           <option value="TI">TI</option>
         </select>
       </div>
-      <div class="mb-3">
-  <label class="form-label"><b>Anexo</b></label>
-  <input 
-    type="file" 
-    id="arquivo" 
-    name="arquivo" 
-    class="form-control"
-  >
-</div>
+      
 
 
       <button type="submit" class="btn btn-success form-control">

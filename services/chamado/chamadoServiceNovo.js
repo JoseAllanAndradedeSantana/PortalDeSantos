@@ -86,9 +86,56 @@ const filtrarChamados = (usuarioId, filtros) => {
     });
 };
 
+
+const criarChamado = (chamado) => {
+    console.log(chamado)
+    return new Promise((resolve, reject) => {
+
+        const sql = `
+            INSERT INTO tb_chamados
+            (
+                titulo,
+                descricao,
+                empresa,
+                setor,
+                responsavel,
+                dataAbertura,
+                status,
+                prioridade,
+                idUsuario
+            )
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+        `;
+
+        const parametros = [
+            chamado.titulo,
+            chamado.descricao,
+            chamado.empresa,
+            chamado.setor,
+            chamado.responsavel,
+            chamado.dataAbertura,
+            chamado.status,
+            chamado.prioridade,
+            chamado.idUsuario
+        ];
+
+        console.log(parametros)
+
+        mysqlConnection.query(sql, parametros, (error, result) => {
+
+            if (error) {
+                return reject(error);
+            }
+
+            resolve(result);
+        });
+    });
+};
+
 module.exports = {
     buscarChamados,
     quantidadeDeChamadosAbertos,
     quantidadeDeChamadosFechados,
-    filtrarChamados
+    filtrarChamados,
+    criarChamado
 };
