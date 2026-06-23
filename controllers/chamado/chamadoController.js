@@ -2,6 +2,7 @@ const chamadoService = require('../../services/chamado/chamadoServiceNovo');
 
 const criarChamado = async (req, res) => {
     try{
+        console.log(req);
         res.render('admin/tarefa/new.ejs',{
             usuario:req.session.usuario.nomeUsuario
         })

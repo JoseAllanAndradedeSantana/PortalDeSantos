@@ -6,23 +6,21 @@ const mysqlConnection  = require("../../models/dataBaseMysql");
 
 
 router.get('/admin/bomba/new-bomba', (req,res) => {
-    res.render('admin/bomba/newbomba.ejs')
+    res.render('admin/bomba/newbomba.ejs',
+        {
+            newEmpresa:req.query.empresa
+        });
 });
 
 
 router.post('/admin/bomba/delete',(req,res) =>{
     let idBomba = req.body.idBomba;
     let empresa = req.body.nome_empresa;
-    console.log('ENTREI NA FUNCAO DE APAGAR')
-    console.log(idBomba,empresa);
     const sql = `UPDATE tb_bomba SET is_ativo = 0 WHERE id = ?`;
-
-
     mysqlConnection.query(sql,[idBomba],(erro,sucess) => {
         res.redirect('/portaldesantos/admin/bomba/bombas/' + empresa);
-    })
-
-})
+    });
+});
 
 router.get('/admin/bomba/bombas',(req,res) => {
     let empresa = req.session.usuario.empresaUsuario;
@@ -32,27 +30,30 @@ router.get('/admin/bomba/bombas',(req,res) => {
     console.dir(req.hostname,req.ip)
     const sql = "SELECT * FROM tb_bomba WHERE empresa = ? AND is_ativo = 1;"
     mysqlConnection.query(sql,[newEmpresa],(erro,sucess) =>{
-        res.render('admin/bomba/bombas.ejs', { bombas: sucess });
+        res.render('admin/bomba/bombas.ejs', 
+            { 
+                bombas: sucess,newEmpresa:newEmpresa 
+            });
     });
 });
 
 router.get('/admin/bomba/bombas/:empresa',(req,res) => {
     let empresa = req.session.usuario.empresaUsuario;
     let newEmpresa = req.params.empresa;
-    console.log(newEmpresa);
     const sql = "SELECT * FROM tb_bomba WHERE empresa = ? AND is_ativo = 1;"
     mysqlConnection.query(sql,[newEmpresa],(erro,sucess) => {
-        res.render('admin/bomba/bombas.ejs', { bombas: sucess });
+        res.render('admin/bomba/bombas.ejs', 
+            { 
+                bombas: sucess,
+                newEmpresa:newEmpresa 
+            });
     });
 });
 
 router.get('/admin/bomba/bomba/:id',(req,res) => {
     let id = req.params.id;
-    console.log(id);
     const sql = "SELECT * FROM tb_bomba WHERE id = ?;"
     mysqlConnection.query(sql,[id],(erro,sucess) =>{
-       // console.log(sucess[0].numero);
-        console.log(sucess);
         const numeroBomba = sucess[0].numero;
         const empresa = sucess[0].empresa;
          const sqlLacre = `
@@ -70,7 +71,11 @@ router.get('/admin/bomba/bomba/:id',(req,res) => {
                 return res.send("Erro");
             }
 
-            res.render('admin/bomba/bomba.ejs', { bomba: sucess[0],lacres: lacresResult});
+            res.render('admin/bomba/bomba.ejs',
+                 { 
+                    bomba: sucess[0],
+                    lacres: lacresResult
+                });
         });
     });
 });
@@ -158,8 +163,6 @@ router.get('/admin/edit/bomba/:id',(req,res) => {
         if(error){
             console.log('Error ao encontrar bomba', error);
         }
-       // res.json(sucess[0])
-        //console.log(res.json(sucess[0]));
         res.render('admin/bomba/edit-bomba.ejs',{bomba:sucess[0]});
     });
 });

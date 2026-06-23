@@ -4,14 +4,25 @@ const buscarChamados = (usuarioId) => {
     return new Promise((resolve, reject) => {
         
         const sql = `SELECT * FROM tb_chamados WHERE status = 'ABERTO' AND idUsuario = ? ORDER BY id DESC`;
+        const sqlAdmin = "SELECT * FROM tb_chamados WHERE status = 'ABERTO' ORDER BY id DESC";
+        if(usuarioId != 2){
+            mysqlConnection.query(sql,[usuarioId] ,(error, result) => {
+                if (error) {
+                    return reject(error);
+                }
 
-        mysqlConnection.query(sql,[usuarioId] ,(error, result) => {
-            if (error) {
-                return reject(error);
-            }
+                resolve(result);
+            });
+        }else{
+            
+            mysqlConnection.query(sqlAdmin,[usuarioId] ,(error, result) => {
+                if (error) {
+                    return reject(error);
+                }
 
-            resolve(result);
-        });
+                resolve(result);
+            });
+        }
     });
 };
 
@@ -68,7 +79,7 @@ const filtrarChamados = (usuarioId, filtros) => {
             params.push(filtros.dataFim);
         }
 
-        if (usuarioId) {
+        if (usuarioId != 2) {
             sql += " AND idUsuario = ?";
             params.push(usuarioId);
         }

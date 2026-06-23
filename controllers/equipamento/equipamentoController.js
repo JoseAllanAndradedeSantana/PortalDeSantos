@@ -1,0 +1,1 @@
+const equipamentoService = require('../../services/equipamento/equipamentoService');
