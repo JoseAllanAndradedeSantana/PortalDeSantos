@@ -1,0 +1,180 @@
+<%- include ('./../../partials/header.ejs') %>
+<%- include ('./../../partials/navbar.ejs') %>
+
+<style>
+  body{
+    background: #f4f6f9;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+  .container-form{
+    max-width: 950px;
+    margin: 40px auto;
+  }
+
+  .card-form{
+    background: #fff;
+    padding: 35px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+  }
+
+  .titulo-pagina{
+    font-weight: bold;
+    color: #2c3e50;
+    margin-bottom: 25px;
+  }
+
+  .form-label{
+    color: #34495e;
+    margin-bottom: 6px;
+  }
+
+  .form-control,
+  .form-select{
+    border-radius: 8px;
+    padding: 10px;
+    border: 1px solid #dcdfe6;
+  }
+
+  .btn-success{
+    padding: 12px;
+    border-radius: 8px;
+    font-weight: bold;
+  }
+</style>
+
+<div class="container-form">
+
+  <div class="card-form">
+
+    <a href="/portaldesantos/chamados" class="link-voltar">
+      ← Voltar
+    </a>
+
+    <h2 class="titulo-pagina">
+      Cadastro de Produto
+    </h2>
+
+    <form method="POST" action="/portaldesantos/produto/salvar" onsubmit="return validar()">
+
+      <!-- CÓDIGO DE BARRA -->
+      <div class="mb-3">
+        <label class="form-label"><b>Código de Barra</b></label>
+        <input 
+          id="codigo_barra"
+          name="codigo"
+          type="text"
+          class="form-control"
+          placeholder="Digite o código de barra"
+        >
+      </div>
+
+      <!-- NCM -->
+      <div class="mb-3">
+        <label class="form-label"><b>NCM</b></label>
+        <input 
+          id="ncm"
+          name="ncm"
+          type="text"
+          class="form-control"
+          placeholder="Digite o NCM"
+        >
+      </div>
+
+      <!-- NOME -->
+      <div class="mb-3">
+        <label class="form-label"><b>Nome do Produto</b></label>
+        <input 
+          id="nome"
+          name="nome"
+          type="text"
+          class="form-control"
+          placeholder="Nome do produto"
+        >
+      </div>
+
+      <!-- PREÇO -->
+      <div class="mb-3">
+        <label class="form-label"><b>Preço</b></label>
+        <input 
+          id="preco"
+          name="preco"
+          type="number"
+          step="0.01"
+          class="form-control"
+          placeholder="0.00"
+        >
+      </div>
+
+      <!-- PRODUTO ATIVO -->
+<div class="mb-3">
+  <label class="form-label"><b>Produto Ativo</b></label>
+  <select id="ativo" name="ativo" class="form-select">
+    <option value="1">Sim</option>
+    <option value="0">Não</option>
+  </select>
+</div>
+
+<!-- PRODUTO COMPOSTO -->
+<div class="mb-3">
+  <label class="form-label"><b>Produto Composto</b></label>
+  <select id="composto" name="composto" class="form-select">
+    <option value="0">Não</option>
+    <option value="1">Sim</option>
+  </select>
+</div>
+
+      <!-- DESCRIÇÃO -->
+      <div class="mb-3">
+        <label class="form-label"><b>Descrição</b></label>
+        <textarea 
+          id="descricao"
+          name="descricao"
+          class="form-control"
+          placeholder="Descrição do produto"
+        ></textarea>
+      </div>
+
+      <button type="submit" class="btn btn-success form-control">
+        SALVAR PRODUTO
+      </button>
+
+    </form>
+
+  </div>
+</div>
+
+<script>
+  function validar(){
+
+      let codigo = document.getElementById('codigo_barra').value;
+      let ncm = document.getElementById('ncm').value;
+      let nome = document.getElementById('nome').value;
+      let preco = document.getElementById('preco').value;
+
+      if(codigo == ''){
+          alert("Código de barra é obrigatório!");
+          return false;
+      }
+
+      if(ncm == ''){
+          alert("NCM é obrigatório!");
+          return false;
+      }
+
+      if(nome == ''){
+          alert("Nome do produto é obrigatório!");
+          return false;
+      }
+
+      if(preco == '' || preco <= 0){
+          alert("Preço inválido!");
+          return false;
+      }
+
+      return true;
+  }
+</script>
+
+<%- include ('./../../partials/footer.ejs') %>
